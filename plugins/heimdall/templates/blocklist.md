@@ -1,5 +1,0 @@
-\`\`\`
-{% for result in results %}
-	{{result}}
-{% endfor %}
-\`\`\`
