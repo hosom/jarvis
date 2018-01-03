@@ -1,0 +1,13 @@
+[Core]
+Name = OTP
+module = otp
+
+[Documentation]
+Description = Add OTP command filter to errbot.
+
+[Python]
+Version = 3
+
+[Errbot]
+min = 5.1.3
+max = 5.1.3

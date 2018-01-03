@@ -1,0 +1,13 @@
+[Core]
+name = TeamCymru
+module = teamcymru
+
+[Documentation]
+description = Interract with TeamCymru APIs
+
+[Python]
+version = 3
+
+[Errbot]
+min = 5.1.3
+max = 5.1.3

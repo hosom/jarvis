@@ -1,0 +1,1 @@
+{{ sensor.hostname }} has been flagged for isolation.

@@ -1,0 +1,13 @@
+[Core]
+name = CbResponse
+module = cbresponse
+
+[Documentation]
+description = Carbon Black Response Interraction
+
+[Python]
+version = 3
+
+[Errbot]
+min = 5.1.3
+max = 5.1.3
