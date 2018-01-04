@@ -20,7 +20,7 @@ class Nslookup(BotPlugin):
 		qtype = 'A'
 
 		# if this is an ip, do a reverse lookup instead
-		if ip_matcher.match(name):
+		if self.ip_matcher.match(name):
 			name = dns.reversename.from_address(name)
 			qtype = 'PTR'
 
