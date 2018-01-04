@@ -18,6 +18,7 @@ class Nslookup(BotPlugin):
 		'''
 
 		qtype = 'A'
+		err = None
 
 		# if this is an ip, do a reverse lookup instead
 		if self.ip_matcher.match(name):
