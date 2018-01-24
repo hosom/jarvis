@@ -19,7 +19,7 @@ class Minemeld(BotPlugin):
     @arg_botcmd('indicator_type', type=str)
     @arg_botcmd('comment', type=str)
     @arg_botcmd('--share-level', type=str, default='green')
-    def minemeld_add(self, message, miner=miner, indicator=indicator, indicator_type=indicator_type, comment=comment, share_level=share_level):
+    def minemeld_add(self, message, miner=None, indicator=None, indicator_type=None, comment=None, share_level=Noneß):
         '''Add an indicator to a specified Minemeld list.
         '''
 
