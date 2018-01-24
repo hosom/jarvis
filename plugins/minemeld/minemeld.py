@@ -1,6 +1,6 @@
 import requests
 
-from errbot impvort BotPlugin, arg_botcmd
+from errbot import BotPlugin, arg_botcmd
 
 class Minemeld(BotPlugin):
     '''Interract with a Minemeld server to manage lists.
