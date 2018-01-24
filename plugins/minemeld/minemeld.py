@@ -40,7 +40,7 @@ class Minemeld(BotPlugin):
                                 verify=self.config.get('ssl_verify'))
             
             if r.status_code != requests.codes.ok:
-                return dict(err='Request to server failed with error code {0}'.format(r.status_code))
+                return dict(indicator_document=indicator_document, err='Request to server failed with error code {0}'.format(r.status_code))
 
         else:
             return dict(indicator_document=indicator_document, err='This plugin cannot be used without configuration.')
