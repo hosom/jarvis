@@ -14,17 +14,17 @@ class Minemeld(BotPlugin):
             ssl_verify=True
         )
 
-    @arg_botcmd('comment', type=str, template='add')
-    @arg_botcmd('indicator_type', type=str, template='add')
-    @arg_botcmd('indicator', type=str, template='add')
-    @arg_botcmd('miner', type=str, template='add')
-    @arg_botcmd('--share-level', type=str, default='green', template='add')
+    @arg_botcmd('comment', type=str, template='add', help='Why the block is being added.')
+    @arg_botcmd('indicator_type', type=str, template='add', help='The type of indicator to be added. IPv4, IPv6, domain, url')
+    @arg_botcmd('indicator', type=str, template='add', help='The indicator to be added to the miner.')
+    @arg_botcmd('miner', type=str, template='add', help='The minemeld miner to add the IP address to.')
+    @arg_botcmd('--share-level', type=str, default='green', template='add', help='RED or GREEN')
     def minemeld_add(self, message, miner=None, indicator=None, indicator_type=None, comment=None, share_level=None):
         '''Add an indicator to a specified Minemeld list.
         '''
-
+        if not miner or not indicator or not indicator_type or not comment:
+                return dict(err='This command requires all positional arguments.')
         if self.config:
-
             indicator_document = dict(
                 indicator=indicator, 
                 share_level=share_level,
