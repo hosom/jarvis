@@ -21,6 +21,10 @@ class Minemeld(BotPlugin):
     @arg_botcmd('--share-level', type=str, default='green', template='add', help='RED or GREEN')
     def minemeld_add(self, message, miner=None, indicator=None, indicator_type=None, comment=None, share_level=None):
         '''Add an indicator to a specified Minemeld list.
+
+        Example: 
+
+        minemeld add blInboundIPv4 8.8.8.8 IPv4 "Google DNS"
         '''
         if not miner or not indicator or not indicator_type or not comment:
                 return dict(err='This command requires all positional arguments.')
