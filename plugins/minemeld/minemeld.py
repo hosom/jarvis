@@ -35,6 +35,7 @@ class Minemeld(BotPlugin):
             url = self.config.get('server')
             r = requests.post('{0}/config/data/{1}_indicators/append?h={2}'.format(url, miner, miner),
                                 json=indicator_document,
+                                headers={'Content-Type': 'application/json'},
                                 auth=(self.config.get('username'), self.config.get('password')),
                                 verify=self.config.get('ssl_verify'))
             
