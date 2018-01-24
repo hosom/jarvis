@@ -1,0 +1,13 @@
+[Core]
+name = Minemeld
+module = minemeld
+
+[Documentation]
+description = Interract with Minemeld to manage lists.
+
+[Python]
+version = 3
+
+[Errbot]
+min = 5.1.3
+max = 5.1.3
