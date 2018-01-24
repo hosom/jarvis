@@ -43,6 +43,6 @@ class Minemeld(BotPlugin):
                 return dict(err='Request to server failed with error code {0}'.format(r.status_code))
 
         else:
-            return dict(err='This plugin cannot be used without configuration.')
+            return dict(indicator_document=indicator_document, err='This plugin cannot be used without configuration.')
         
         return dict(indicator=indicator, miner=miner)
