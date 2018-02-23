@@ -74,6 +74,5 @@ class CbResponse(BotPlugin):
 			ipaddr = match.group(0)
 			vt_results.append(
 				dict(url='{0}{1}'.format(_ALT_IP_URL, ipaddr), 
-					ipaddr=ipaddr)
+					ipaddr=ipaddr))
 			return dict(vt_results=vt_results)
-			)
