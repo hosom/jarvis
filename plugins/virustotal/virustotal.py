@@ -8,7 +8,7 @@ _ALT_FILE_URL = 'https://www.virustotal.com/#/file/'
 
 _ALT_IP_URL = 'https://www.virustotal.com/#/ip-address/'
 
-class CbResponse(BotPlugin):
+class VirusTotal(BotPlugin):
 	'''
 	VirusTotal lookups.
 	'''
@@ -25,6 +25,21 @@ class CbResponse(BotPlugin):
 							'255.255.255.255/32']				
 			)
 
+	def configure(self, configuration):
+		'''
+		Override configuration to make sure that _private_nets is generated
+		and can be used to ignore certain networks.
+		'''
+		if configuration is not None and configuration != {}:
+			config = configuration
+		else:
+			config = self.get_configuration_template()
+
+		private_nets = [ipaddress.IPv4Network(addr) for addr in config['private_nets']]
+		self._private_nets = private_nets
+
+		super(VirusTotal, self).configure(config)
+
 	@re_botcmd(pattern=r'([a-f0-9]{64}|[a-f0-9]{40}|[a-f0-9]{32})', 
 		matchall=True, prefixed=False, flags=re.IGNORECASE, 
 		template='hash_lookup')
@@ -39,7 +54,7 @@ class CbResponse(BotPlugin):
 			file_hash = match.group(0)
 			
 			# Perform an actual lookup if we have an API key
-			if self.config:
+			if self.config.get('vt_apikey') is not 'VirusTotal API key':
 				params = dict(
 					apikey=self.config.get('vt_apikey'),
 					resource=file_hash
@@ -72,7 +87,6 @@ class CbResponse(BotPlugin):
 				return dict(err='Too many IP addresses to lookup in one batch.')
 			
 			ipaddr = match.group(0)
-			vt_results.append(
-				dict(url='{0}{1}'.format(_ALT_IP_URL, ipaddr), 
+			vt_results.append(dict(url='{0}{1}'.format(_ALT_IP_URL, ipaddr), 
 					ipaddr=ipaddr))
-			return dict(vt_results=vt_results)
+		return dict(vt_results=vt_results)
