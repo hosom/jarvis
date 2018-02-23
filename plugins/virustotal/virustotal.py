@@ -1,4 +1,5 @@
 import re
+import ipaddress
 import requests
 
 from errbot import BotPlugin, re_botcmd
