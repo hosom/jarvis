@@ -44,7 +44,7 @@ class VirusTotal(BotPlugin):
 	@re_botcmd(pattern=r'([a-f0-9]{64}|[a-f0-9]{40}|[a-f0-9]{32})', 
 		matchall=True, prefixed=False, flags=re.IGNORECASE, 
 		template='hash_lookup')
-	def hash_lookup(self, message, matches):
+	def vt_hash_lookup(self, message, matches):
 		'''
 		Match against and lookup a hash anywhere in chat on VirusTotal
 		'''
@@ -76,7 +76,7 @@ class VirusTotal(BotPlugin):
 	@re_botcmd(pattern=r'(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})',
 		matchall=True, prefixed=False, flags=re.IGNORECASE,
 		template='ip_lookup')
-	def ip_lookup(self, message, matches):
+	def vt_ip_lookup(self, message, matches):
 		'''
 		Match against and lookup IP addresses anywhere in chat on VirusTotal
 		'''

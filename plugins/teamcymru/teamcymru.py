@@ -49,7 +49,7 @@ class TeamCymru(BotPlugin):
 	@re_botcmd(pattern=r'(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})',
 				matchall=True, prefixed=False, flags=re.IGNORECASE,
 				template='ip_lookup')
-	def ip_lookup(self, message, matches):
+	def tc_ip_lookup(self, message, matches):
 		'''
 		Match against and lookup IP Addresses in TeamCymru's DNS API.
 		'''
