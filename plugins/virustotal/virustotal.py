@@ -65,6 +65,7 @@ class VirusTotal(BotPlugin):
 			
 			# Perform an actual lookup if we have an API key
 			if self.config.get('vt_apikey') != 'VirusTotal API key':
+				self.log.info('VirusTotal API key configured, performing direct lookup.')
 				params = dict(
 					apikey=self.config.get('vt_apikey'),
 					resource=file_hash
@@ -76,6 +77,7 @@ class VirusTotal(BotPlugin):
 				vt_result['url'] = vt_result['permalink']
 				vt_results.append(vt_result)
 			else:
+				self.log.info('VirusTotal API key is not configured. Returning link to report.')
 				vt_results.append(
 					dict(url='{0}{1}'.format(_ALT_FILE_URL, file_hash),
 						file_hash=file_hash))
@@ -102,6 +104,7 @@ class VirusTotal(BotPlugin):
 			ipaddr = match.group(0)
 
 			if self.config.get('vt_apikey') != 'VirusTotal API key':
+				self.log.info('VirusTotal API key configured, performing direct lookup.')
 				params = dict(
 					apikey=self.config.get('vt_apikey'),
 					resource=ipaddr
@@ -113,6 +116,7 @@ class VirusTotal(BotPlugin):
 				vt_result['url'] = vt_result['permalink']
 				vt_results.append(vt_result)
 			else:
+				self.log.info('VirusTotal API key is not configured. Returning link to report.')
 				vt_results.append(
 					dict(url='{0}{1}'.format(_ALT_IP_URL, ipaddr), 
 						ipaddr=ipaddr))
