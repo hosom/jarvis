@@ -55,7 +55,7 @@ class VirusTotal(BotPlugin):
 			file_hash = match.group(0)
 			
 			# Perform an actual lookup if we have an API key
-			if self.config.get('vt_apikey') is not 'VirusTotal API key':
+			if self.config:
 				params = dict(
 					apikey=self.config.get('vt_apikey'),
 					resource=file_hash
