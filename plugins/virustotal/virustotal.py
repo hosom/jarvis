@@ -70,7 +70,7 @@ class VirusTotal(BotPlugin):
 
 	@arg_botcmd('ip', type=str, template='ip_report',
 				help='IP address to lookup.')
-	def vt_ip_lookup(self, message, ip=None)
+	def vt_ip_lookup(self, message, ip=None):
 		'''Retrieve the VirusTotal report for an IP address.
 		'''
 
