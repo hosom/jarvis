@@ -124,7 +124,7 @@ class VirusTotal(BotPlugin):
 						file_hash=file_hash))
 		
 		return dict(vt_results=vt_results)
-
+	"""
 	# Match IPv4
 	@re_botcmd(pattern=r'(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})',
 		matchall=True, prefixed=False, flags=re.IGNORECASE,
@@ -163,3 +163,4 @@ class VirusTotal(BotPlugin):
 						ipaddr=ipaddr))
 						
 		return dict(vt_results=vt_results)
+		"""
