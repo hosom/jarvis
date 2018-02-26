@@ -5,9 +5,6 @@
     Resolved as: {{ resolution.hostname }} on {{ resolution.last_resolved }}
 {% endfor %}
 
-Last Scanned: {{ scan_date }}
-Positives: {{ positives }}/{{ total }}
-
 {% if error %}
 {{ error }}
 {% endif %}
