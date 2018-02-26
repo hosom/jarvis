@@ -2,10 +2,12 @@ import re
 import ipaddress
 import requests
 
-from errbot import BotPlugin, re_botcmd
+from errbot import BotPlugin, arg_botcmd, re_botcmd
 
 # VirusTotal API Base URL
 _VTAPI = 'https://www.virustotal.com/vtapi/v2/file/report'
+
+_VT_BASE = 'https://www.virustotal.com/vtapi/v2/'
 # Base URL for creating links to VirusTotal File reports
 _ALT_FILE_URL = 'https://www.virustotal.com/#/file/'
 # Base URL for creating links to VirusTotal IP reports
@@ -45,6 +47,19 @@ class VirusTotal(BotPlugin):
 		self._private_nets = private_nets
 
 		super(VirusTotal, self).configure(config)
+
+	@arg_botcmd('hash', type=str, template='file_report',
+				help='Hash to lookup a file with.')
+	def vt_file_lookup(self, message, hash=None):
+		'''Retrieve the VirusTotal report for a file with its hash.
+		'''
+
+		url = '{0}{1}'.format(_VT_BASE, 'file/report')
+		params = dict(apikey=self.config.get('vt_apikey'), 
+						resource=hash)
+		response = requests.get(url, params=params)
+		report = response.json()
+		return report
 
 	# Match sha256,sha1,md5
 	@re_botcmd(pattern=r'([a-f0-9]{64}|[a-f0-9]{40}|[a-f0-9]{32})', 
