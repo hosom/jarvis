@@ -5,7 +5,7 @@ import re
 from errbot import BotPlugin, arg_botcmd
 
 class Nslookup(BotPlugin):
-	'''
+	'''Perform name resolution of hostnames and IP addresses.
 	'''
 
 	ip_pattern = r'(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$)'
@@ -14,7 +14,7 @@ class Nslookup(BotPlugin):
 	@arg_botcmd('name', type=str, template='nslookup')
 	def nslookup(self, message, name=None):
 		'''
-		Perform a local dns lookup of a hostname.
+		Perform a local dns lookup of a hostname or IP address.
 		'''
 
 		qtype = 'A'
