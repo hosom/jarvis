@@ -68,6 +68,25 @@ class VirusTotal(BotPlugin):
 			return dict(error=response.text)
 		return report
 
+	@arg_botcmd('ip', type=str, template='ip_report',
+				help='IP address to lookup.')
+	def vt_ip_lookup(self, message, ip=None)
+		'''Retrieve the VirusTotal report for an IP address.
+		'''
+
+		self.log.info('Performing lookup of ip {0} in VirusTotal'.format(ip))
+		url = '{0}{1}'.format(_VT_BASE, 'ip/report')
+		params = dict(apikey=self.config.get('vt_apikey'), 
+					resource=hash)
+		response = requests.get(url, params=params)
+		self.log.info('Received response of {0} from VirusTotal.'.format(response.status_code))
+		try:
+			report = response.json()
+		except json.decoder.JSONDecodeError:
+			self.log.info('Error processing, message received: {0}'.format(response.text))
+			return dict(error=response.text)
+		return report
+
 	# Match sha256,sha1,md5
 	@re_botcmd(pattern=r'([a-f0-9]{64}|[a-f0-9]{40}|[a-f0-9]{32})', 
 		matchall=True, prefixed=False, flags=re.IGNORECASE, 
