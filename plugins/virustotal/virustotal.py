@@ -1,6 +1,7 @@
 import re
 import ipaddress
 import requests
+import json
 
 from errbot import BotPlugin, arg_botcmd, re_botcmd
 
@@ -54,11 +55,17 @@ class VirusTotal(BotPlugin):
 		'''Retrieve the VirusTotal report for a file with its hash.
 		'''
 
+		self.log.info('Performing lookup of hash {0} in VirusTotal'.format(hash))
 		url = '{0}{1}'.format(_VT_BASE, 'file/report')
 		params = dict(apikey=self.config.get('vt_apikey'), 
 						resource=hash)
 		response = requests.get(url, params=params)
-		report = response.json()
+		self.log.info('Received response of {0} from VirusTotal.'.format(response.status_code))
+		try:
+			report = response.json()
+		except json.decoder.JSONDecodeError:
+			self.log.info('Error processing, message received: {0}'.format(response.text))
+			return dict(error=response.text)
 		return report
 
 	# Match sha256,sha1,md5

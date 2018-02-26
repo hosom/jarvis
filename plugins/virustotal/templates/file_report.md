@@ -2,3 +2,7 @@
 
 Last Scanned: {{ scan_date }}
 Positives: {{ positives }}/{{ total }}
+
+{% if error %}
+{{ error }}
+{% endif %}
