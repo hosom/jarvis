@@ -75,7 +75,7 @@ class VirusTotal(BotPlugin):
 		'''
 
 		self.log.info('Performing lookup of ip {0} in VirusTotal'.format(ip))
-		url = '{0}{1}'.format(_VT_BASE, 'ip/report')
+		url = '{0}{1}'.format(_VT_BASE, 'ip-address/report')
 		params = dict(apikey=self.config.get('vt_apikey'), 
 					resource=hash)
 		response = requests.get(url, params=params)
