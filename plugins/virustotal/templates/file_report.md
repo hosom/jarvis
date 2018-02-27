@@ -5,4 +5,6 @@ Positives: {{ positives }}/{{ total }}
 
 {% if error %}
 {{ error }}
+An error occurred while processing your request. 
+Please check your network connectivity and API key.
 {% endif %}

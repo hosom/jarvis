@@ -1,10 +1,12 @@
-**VirusTotal Results for IP Lookup**
+[**VirusTotal Results for IP Lookup**]({{ permalink }})
 
 {{ verbose_msg }}
-{% for resolution in resolutions %}
-    Resolved as: {{ resolution.hostname }} on {{ resolution.last_resolved }}
-{% endfor %}
+Resolved as {{ resolutions | length }} different hostnames.
+
+**AS Data**: Country: {{ country }} Owner: {{ as_owner }} AS: {{ asn }}
 
 {% if error %}
 {{ error }}
+An error occurred while processing your request. 
+Please check your network connectivity and API key.
 {% endif %}
