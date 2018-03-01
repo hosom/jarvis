@@ -13,8 +13,7 @@ class Nslookup(BotPlugin):
 
 	@arg_botcmd('name', type=str, template='nslookup')
 	def nslookup(self, message, name=None):
-		'''
-		Perform a local dns lookup of a hostname or IP address.
+		'''Perform a local dns lookup of a hostname or IP address.
 		'''
 
 		qtype = 'A'

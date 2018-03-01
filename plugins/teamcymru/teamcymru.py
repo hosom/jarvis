@@ -17,7 +17,7 @@ def get_fields(answers):
 	return [field.strip() for field in fields]
 
 class TeamCymru(BotPlugin):
-	'''
+	'''Perform lookups to the TeamCymru DNS APIs.
 	'''
 
 	def get_configuration_template(self):
