@@ -60,7 +60,7 @@ class VirusTotal(BotPlugin):
 		report['permalink'] = '{0}{1}'.format(_ALT_IP_URL, ip)
 		return report
 
-	@re_botcmd(pattern=r'(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})',
+	@re_botcmd(pattern=r'(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})', hidden=True,
 	matchall=True, prefixed=False, flags=re.IGNORECASE, template='ip_match')
 	def vt_ip_match(self, message, matches):
 		'''Automatic IP address lookups.
@@ -73,7 +73,7 @@ class VirusTotal(BotPlugin):
 		
 		return dict(results=results)
 
-	@re_botcmd(pattern=r'([a-f0-9]{64}|[a-f0-9]{40}|[a-f0-9]{32})', 
+	@re_botcmd(pattern=r'([a-f0-9]{64}|[a-f0-9]{40}|[a-f0-9]{32})', hidden=True,
 		matchall=True, prefixed=False, flags=re.IGNORECASE, 
 		template='hash_match')
 	def vt_hash_match(self, message, matches):
