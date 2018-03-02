@@ -60,42 +60,29 @@ class VirusTotal(BotPlugin):
 		report['permalink'] = '{0}{1}'.format(_ALT_IP_URL, ip)
 		return report
 
-"""
-	# Match sha256,sha1,md5
+	@re_botcmd(pattern=r'(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})',
+	matchall=True, prefixed=False, flags=re.IGNORECASE, template='ip_match')
+	def vt_ip_match(self, message, matches):
+		'''Automatic IP address lookups.
+		'''
+
+		results = []
+		for match in matches:
+			ip = match.group(0)
+			results.append(dict(permalink='{0}{1}'.format(_ALT_IP_URL, ip), ip=ip))
+		
+		return dict(results=results)
+
 	@re_botcmd(pattern=r'([a-f0-9]{64}|[a-f0-9]{40}|[a-f0-9]{32})', 
 		matchall=True, prefixed=False, flags=re.IGNORECASE, 
-		template='hash_lookup')
-	def vt_hash_lookup(self, message, matches):
-		'''vt_hash_lookup matches against hashes in chat and then performs lookups
-		against the VirusTotal API. 
-
-		If an API key is unavailable, the bot will reply with a link to the file
-		report on VirusTotal.
+		template='hash_match')
+	def vt_hash_match(self, message, matches):
+		'''Automatic hash lookups.
 		'''
-		vt_results = []
+
+		results = []
 		for match in matches:
-			if len(matches) > 15:
-				return dict(err='Too many hashes to lookup in one batch.')
-			file_hash = match.group(0)
-			
-			# Perform an actual lookup if we have an API key
-			if self.config.get('vt_apikey') != 'VirusTotal API key':
-				self.log.info('VirusTotal API key configured, performing direct lookup.')
-				params = dict(
-					apikey=self.config.get('vt_apikey'),
-					resource=file_hash
-					)
-				r = requests.post(_VTAPI, data=params)
-				vt_result = r.json()
-				vt_result['api_enabled'] = True
-				vt_result['file_hash'] = file_hash
-				vt_result['url'] = vt_result['permalink']
-				vt_results.append(vt_result)
-			else:
-				self.log.info('VirusTotal API key is not configured. Returning link to report.')
-				vt_results.append(
-					dict(url='{0}{1}'.format(_ALT_FILE_URL, file_hash),
-						file_hash=file_hash))
+			checksum = match.group(0)
+			results.append(dict(permalink='{0}{1}'.format(_ALT_FILE_URL, checksum), hash=checksum))
 		
-		return dict(vt_results=vt_results)
-"""
+		return dict(results=results)

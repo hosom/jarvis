@@ -5,7 +5,7 @@ import re
 from errbot import BotPlugin, arg_botcmd
 
 class Nslookup(BotPlugin):
-	'''Perform name resolution of hostnames and IP addresses.
+	'''DNS Resolution.
 	'''
 
 	ip_pattern = r'(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$)'
