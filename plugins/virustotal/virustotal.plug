@@ -1,6 +1,7 @@
 [Core]
 name = VirusTotal
 module = virustotal
+DependsOn = LocalNets
 
 [Documentation]
 description = Interract with VirusTotal

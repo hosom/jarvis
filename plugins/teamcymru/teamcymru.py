@@ -19,37 +19,11 @@ def get_fields(answers):
 class TeamCymru(BotPlugin):
 	'''Perform lookups to the TeamCymru DNS APIs.
 	'''
-
-	def get_configuration_template(self):
-		return dict(
-				private_nets=['0.0.0.0/8',
-							'10.0.0.0/8',
-							'127.0.0.0/8',
-							'169.254.0.0/16',
-							'172.16.0.0/12',
-							'192.168.0.0/16',
-							'255.255.255.255/32']
-			)
-
-	def configure(self, configuration):
-		'''
-		Override configuration to make sure that _private_nets is generated
-		and can be used to ignore certain networks.
-		'''
-		if configuration is not None and configuration != {}:
-			config = configuration
-		else:
-			config = self.get_configuration_template()
-
-		private_nets = [ipaddress.IPv4Network(addr) for addr in config['private_nets']]
-		self._private_nets = private_nets
-
-		super(TeamCymru, self).configure(config)
-
-	@re_botcmd(pattern=r'(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})',
+	
+	@re_botcmd(pattern=r'(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})', hidden=True,
 				matchall=True, prefixed=False, flags=re.IGNORECASE,
-				template='ip_lookup')
-	def tc_ip_lookup(self, message, matches):
+				template='tc_ip_match')
+	def tc_ip_match(self, message, matches):
 		'''
 		Match against and lookup IP Addresses in TeamCymru's DNS API.
 		'''
@@ -62,8 +36,7 @@ class TeamCymru(BotPlugin):
 				continue
 
 			ignore = False
-			for network in self._private_nets:
-				# check for ignored networks.
+			for network in self.get_plugin('LocalNets').local_nets:
 				if ip in network:
 					ignore = True
 					break

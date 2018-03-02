@@ -61,21 +61,31 @@ class VirusTotal(BotPlugin):
 		return report
 
 	@re_botcmd(pattern=r'(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})', hidden=True,
-	matchall=True, prefixed=False, flags=re.IGNORECASE, template='ip_match')
+	matchall=True, prefixed=False, flags=re.IGNORECASE, template='vt_ip_match')
 	def vt_ip_match(self, message, matches):
 		'''Automatic IP address lookups.
 		'''
 
 		results = []
 		for match in matches:
-			ip = match.group(0)
+			ip = ipaddress.ip_address(match.group(0))
+
+			ignore = False
+			for network in self.get_plugin('LocalNets').local_nets:
+				if ip in network:
+					ignore = True
+					break
+
+			if ignore:
+				continue
+			
 			results.append(dict(permalink='{0}{1}'.format(_ALT_IP_URL, ip), ip=ip))
 		
 		return dict(results=results)
 
 	@re_botcmd(pattern=r'([a-f0-9]{64}|[a-f0-9]{40}|[a-f0-9]{32})', hidden=True,
 		matchall=True, prefixed=False, flags=re.IGNORECASE, 
-		template='hash_match')
+		template='vt_hash_match')
 	def vt_hash_match(self, message, matches):
 		'''Automatic hash lookups.
 		'''

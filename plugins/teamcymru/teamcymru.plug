@@ -1,6 +1,7 @@
 [Core]
 name = TeamCymru
 module = teamcymru
+DependsOn = LocalNets
 
 [Documentation]
 description = Interract with TeamCymru APIs
