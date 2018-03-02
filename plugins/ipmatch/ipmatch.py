@@ -13,4 +13,8 @@ class IPMatch(BotPlugin):
         '''Automatic action whenever an IP address is seen.
         '''
 
+        for match in matches:
+            for response in self.get_plugin('VirusTotal').vt_ip_lookup(message, match.group(0)):
+                self.log.info(response)
+                self.send(message.frm, response)
         return dict(hello='Hello, World!')

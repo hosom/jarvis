@@ -33,5 +33,4 @@ class Nslookup(BotPlugin):
 			answers = [None]
 			err = 'Failed to resolve name.'
 
-
 		return dict(name=name, answers=[str(answer) for answer in answers], err=err)

@@ -1,6 +1,7 @@
 [Core]
 name = IPMatch
 module = ipmatch
+DependsOn = VirusTotal
 
 [Documentation]
 description = Perform automatic actions when seeing an IP Address.
